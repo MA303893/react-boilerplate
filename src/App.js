@@ -1,21 +1,121 @@
 import React, {Component} from "react"
-import './App.scss'
+// import './App.scss'
+import {Container, Dropdown, Image, Menu, Divider, List, Segment, Grid, Header} from 'semantic-ui-react'
+import { Button, Confirm } from 'semantic-ui-react'
+
+
 
 class App extends Component {
+  state = { open: false, result: 'show the modal to capture a result' }
+
+  show = () => this.setState({ open: true })
+  handleConfirm = () => this.setState({ result: 'confirmed', open: false })
+  handleCancel = () => this.setState({ result: 'cancelled', open: false })
+
   render() {
+    const { open, result } = this.state
     return (
-      <div className='main-container'>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa
-          strong. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
-          felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-          fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
-          justo. Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
-          semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend
-          ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus
-          varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
-          ultricies nisi.</p>
+      <div>
+        <Menu fixed='top' inverted>
+          <Container>
+            <Menu.Item as='a' header>
+              <Image
+                size='mini'
+                src='/logo.png'
+                style={{marginRight: '1.5em'}}
+              />
+              Testicles
+            </Menu.Item>
+            <Menu.Item as='a'>Home</Menu.Item>
+
+            <Dropdown item simple text='Dropdown'>
+              <Dropdown.Menu>
+                <Dropdown.Item>List Item</Dropdown.Item>
+                <Dropdown.Item>List Item</Dropdown.Item>
+                <Dropdown.Divider/>
+                <Dropdown.Header>Header Item</Dropdown.Header>
+                <Dropdown.Item>
+                  <i className='dropdown icon'/>
+                  <span className='text'>Submenu</span>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>List Item</Dropdown.Item>
+                    <Dropdown.Item>List Item</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown.Item>
+                <Dropdown.Item>List Item</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Container>
+        </Menu>
+
+        <Segment
+          inverted
+          vertical
+          style={{ margin: '5em 0em 0em', padding: '5em 0em' }}
+        >
+
+          <Container textAlign='center'>
+            <p>Result: <em>{result}</em></p>
+
+            <Button onClick={this.show}>Show</Button>
+            <Confirm
+              open={open}
+              onCancel={this.handleCancel}
+              onConfirm={this.handleConfirm}
+              style={{ marginTop: '20%', marginLeft: '24%' }}
+            />
+            <Grid divided inverted stackable>
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <Header inverted as='h4' content='Group 1' />
+                  <List link inverted>
+                    <List.Item as='a'>Link One</List.Item>
+                    <List.Item as='a'>Link Two</List.Item>
+                    <List.Item as='a'>Link Three</List.Item>
+                    <List.Item as='a'>Link Four</List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as='h4' content='Group 2' />
+                  <List link inverted>
+                    <List.Item as='a'>Link One</List.Item>
+                    <List.Item as='a'>Link Two</List.Item>
+                    <List.Item as='a'>Link Three</List.Item>
+                    <List.Item as='a'>Link Four</List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as='h4' content='Group 3' />
+                  <List link inverted>
+                    <List.Item as='a'>Link One</List.Item>
+                    <List.Item as='a'>Link Two</List.Item>
+                    <List.Item as='a'>Link Three</List.Item>
+                    <List.Item as='a'>Link Four</List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as='h4' content='Footer Header' />
+                  <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+
+            <Divider inverted section />
+            <Image
+              centered
+              size='mini'
+              src='/logo.png'
+            />
+            <List horizontal inverted divided link>
+              <List.Item as='a' href='#'>Site Map</List.Item>
+              <List.Item as='a' href='#'>Contact Us</List.Item>
+              <List.Item as='a' href='#'>Terms and Conditions</List.Item>
+              <List.Item as='a' href='#'>Privacy Policy</List.Item>
+            </List>
+          </Container>
+        </Segment>
       </div>
-    );
+    )
   }
 }
 
