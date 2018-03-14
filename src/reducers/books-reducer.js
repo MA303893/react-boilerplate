@@ -1,12 +1,31 @@
-export default () => {
-  return(
-    [
-      {title: "Book1", pages: 101},
-      {title: "Book2", pages: 1010},
-      {title: "Book3", pages: 54},
-      {title: "Book4", pages: 301},
-      {title: "Book5", pages: 31},
-      {title: "Book6", pages: 89}
-    ]
-  )
+export function booksHasErrored(state = false, action) {
+  switch (action.type) {
+    case 'BOOKS_HAS_ERRORED':
+      return action.hasErrored;
+
+    default:
+      return state;
+  }
+}
+
+export function booksIsLoading(state = false, action) {
+  switch (action.type) {
+    case 'BOOKS_IS_LOADING':
+      return action.isLoading;
+
+    default:
+      return state;
+  }
+}
+
+export function books(state = [], action) {
+  switch (action.type) {
+    case 'BOOKS_FETCH_DATA_SUCCESS':
+      return action.books;
+    case 'ADD_BOOK_SUCCESS':
+      return [...state, action.book];
+
+    default:
+      return state;
+  }
 }
